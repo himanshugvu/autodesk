@@ -21,6 +21,7 @@
   "eslintConfig": {
     "extends": "react-app"
   },
+  "proxy": "https://autodesk-testapp.herokuapp.com/",
   "browserslist": {
     "production": [
       ">0.2%",
