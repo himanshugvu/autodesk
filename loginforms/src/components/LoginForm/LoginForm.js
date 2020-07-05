@@ -22,7 +22,7 @@ function LoginForm(props) {
   const handleSubmitClick = (e) => {
     e.preventDefault();
     const payload = {
-      username: state.email,
+      username: props.location.username,
       password: state.password,
     };
     axios
@@ -42,7 +42,7 @@ function LoginForm(props) {
         }
       })
       .catch(function (error) {
-        console.log(error);
+        props.showError("Username or password do not match");
       });
   };
   const redirectToHome = () => {
@@ -57,19 +57,7 @@ function LoginForm(props) {
     <div className="card col-12 col-lg-4 login-card mt-2 hv-center">
       <form>
         <div className="form-group text-left">
-          <label htmlFor="exampleInputEmail1">Email address</label>
-          <input
-            type="email"
-            className="form-control"
-            id="email"
-            aria-describedby="emailHelp"
-            placeholder="Enter email"
-            value={state.email}
-            onChange={handleChange}
-          />
-          <small id="emailHelp" className="form-text text-muted">
-            We'll never share your email with anyone else.
-          </small>
+          <label htmlFor="username">{props.location.username}</label>
         </div>
         <div className="form-group text-left">
           <label htmlFor="exampleInputPassword1">Password</label>

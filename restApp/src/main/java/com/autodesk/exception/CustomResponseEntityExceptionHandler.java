@@ -22,7 +22,7 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
     @ExceptionHandler
     public final ResponseEntity<Object> handleUsernameDoesNotExists(UsernameDoesNotExistsException ex, WebRequest request){
     	UsernameDoesNotExistsResponse exceptionResponse = new UsernameDoesNotExistsResponse(ex.getMessage());
-        return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity(exceptionResponse, HttpStatus.NOT_FOUND);
     }
 
 }

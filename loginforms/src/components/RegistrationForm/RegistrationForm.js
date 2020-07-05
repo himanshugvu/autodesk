@@ -58,8 +58,8 @@ function RegistrationForm(props) {
     props.history.push("/home");
   };
   const redirectToLogin = () => {
-    props.updateTitle("Login");
-    props.history.push("/login");
+    props.updateTitle("Sign in");
+    props.history.push("/");
   };
   const handleSubmitClick = (e) => {
     e.preventDefault();

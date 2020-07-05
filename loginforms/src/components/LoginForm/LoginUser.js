@@ -17,33 +17,44 @@ function LoginForm(props) {
       [id]: value,
     }));
   };
-
-  const handleSubmitClick = (e) => {
-    e.preventDefault();
+  const sendDetailsToServer = () => {
     const payload = {
       username: state.email,
     };
     axios
       .post(API_BASE_URL + "loginuser", payload)
       .then(function (response) {
+        console.log(response);
         if (response.status === 200) {
           setState((prevState) => ({
             ...prevState,
             successMessage: "Login successful. Redirecting to home page..",
           }));
-          redirectToLogin();
+          redirectToLogin(response.data);
           props.showError(null);
         } else {
           props.showError("Username does not exists");
         }
       })
       .catch(function (error) {
-        console.log(error);
+        props.showError("Username does not exists");
       });
+  }
+  const handleSubmitClick = (e) => {
+    e.preventDefault();
+    if (state.email !== '') {
+      sendDetailsToServer();
+    } else {
+      props.showError("Please enter username ");
+    }
   };
-  const redirectToLogin = () => {
+  const redirectToLogin = (data) => {
+    console.log(data);
     props.updateTitle("Login");
-    props.history.push("/login");
+    props.history.push({
+      pathname: '/login',
+      username: data.username,
+    });
   };
   const redirectToRegister = () => {
     props.history.push("/register");
@@ -53,38 +64,23 @@ function LoginForm(props) {
     <div className="card col-12 col-lg-4 login-card mt-2 hv-center">
       <form>
         <div className="form-group text-left">
-          <label htmlFor="exampleInputEmail1">Email address</label>
+          <label htmlFor="exampleInputEmail1">Username</label>
           <input
             type="email"
             className="form-control"
             id="email"
             aria-describedby="emailHelp"
-            placeholder="Enter email"
             value={state.email}
-            onChange={handleChange}
-          />
-          <small id="emailHelp" className="form-text text-muted">
-            We'll never share your email with anyone else.
-          </small>
-        </div>
-        <div className="form-group text-left">
-          <label htmlFor="exampleInputPassword1">Password</label>
-          <input
-            type="password"
-            className="form-control"
-            id="password"
-            placeholder="Password"
-            value={state.password}
             onChange={handleChange}
           />
         </div>
         <div className="form-check"></div>
         <button
           type="submit"
-          className="btn btn-primary"
+          className="btn btn-primary form-control"
           onClick={handleSubmitClick}
         >
-          Submit
+          Next
         </button>
       </form>
       <div
@@ -94,11 +90,19 @@ function LoginForm(props) {
       >
         {state.successMessage}
       </div>
-      <div className="registerMessage">
-        <span>Dont have an account? </span>
+      <div className="mt-2">
+        <span>New to AutoDesk? </span>
         <span className="loginText" onClick={() => redirectToRegister()}>
-          Register
+          <u> Create Account</u>
         </span>
+      </div>
+
+      <div className="mt-4">
+        <span>Your Account for everything Autodesk </span>
+        <br />
+        <span className="loginText" onClick={() => redirectToLogin()}>
+          Learn More
+      </span>
       </div>
     </div>
   );
