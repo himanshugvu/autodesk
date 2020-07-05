@@ -6,6 +6,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.autodesk.exception.UsernameAlreadyExistsException;
+import com.autodesk.exception.UsernameDoesNotExistsException;
 import com.autodesk.model.User;
 import com.autodesk.repository.UserRepository;
 
@@ -31,6 +32,12 @@ public class UserService {
             throw new UsernameAlreadyExistsException("Username '"+newUser.getUsername()+"' already exists");
         }
 
+    }
+    
+    public void checkUserExists(String username) {
+    	  User user = userRepository.findByUsername(username);
+          if(user==null) 
+        	  throw new UsernameDoesNotExistsException("Username '"+username+"' not found");
     }
 
 

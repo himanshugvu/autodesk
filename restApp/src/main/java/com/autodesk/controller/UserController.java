@@ -22,6 +22,7 @@ import com.autodesk.config.JwtTokenProvider;
 import com.autodesk.model.User;
 import com.autodesk.payload.JWTLoginSucessReponse;
 import com.autodesk.payload.LoginRequest;
+import com.autodesk.payload.LoginUser;
 import com.autodesk.service.MapValidationErrorService;
 import com.autodesk.service.UserService;
 import com.autodesk.validator.UserValidator;
@@ -45,6 +46,14 @@ public class UserController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @CrossOrigin
+    @PostMapping("/loginuser")
+    public ResponseEntity<?> loginuser(@Valid @RequestBody LoginUser loginUser, BindingResult result){
+        ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
+        if(errorMap != null) return errorMap;
+        userService.checkUserExists(loginUser.getUsername());
+        return ResponseEntity.ok(loginUser);
+    }
 
     @CrossOrigin
     @PostMapping("/login")

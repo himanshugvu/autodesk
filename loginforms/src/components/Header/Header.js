@@ -3,7 +3,8 @@ import { withRouter } from "react-router-dom";
 
 function Header(props) {
   const capitalize = (s) => {
-    if (typeof s !== 'string') return 'Sign in'
+    if (typeof s !== 'string') return ''
+    if (s === '') return 'Sign in'
     return s.charAt(0).toUpperCase() + s.slice(1)
   }
   const title = capitalize(props.location.pathname.substring(1, props.location.pathname.length))
