@@ -24,7 +24,6 @@ function LoginForm(props) {
     axios
       .post(API_BASE_URL + "loginuser", payload)
       .then(function (response) {
-        console.log(response);
         if (response.status === 200) {
           setState((prevState) => ({
             ...prevState,
@@ -33,11 +32,11 @@ function LoginForm(props) {
           redirectToLogin(response.data);
           props.showError(null);
         } else {
-          props.showError("Username does not exists");
+          props.showError("The username is not recognized");
         }
       })
       .catch(function (error) {
-        props.showError("Username does not exists");
+        props.showError("The username is not recognized");
       });
   }
   const handleSubmitClick = (e) => {
@@ -49,8 +48,8 @@ function LoginForm(props) {
     }
   };
   const redirectToLogin = (data) => {
-    console.log(data);
-    props.updateTitle("Login");
+    window.$name = data.username;
+    props.updateTitle("Welcome");
     props.history.push({
       pathname: '/login',
       username: data.username,

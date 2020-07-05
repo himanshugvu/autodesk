@@ -28,7 +28,7 @@ import com.autodesk.service.UserService;
 import com.autodesk.validator.UserValidator;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/auth/")
 public class UserController {
 
     @Autowired

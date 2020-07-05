@@ -3,6 +3,7 @@ import axios from "axios";
 import "./LoginForm.css";
 import { API_BASE_URL } from "../../constants/apiContants";
 import { withRouter } from "react-router-dom";
+import back from './back.png';
 
 function LoginForm(props) {
   const [state, setState] = useState({
@@ -53,10 +54,15 @@ function LoginForm(props) {
     props.history.push("/register");
     props.updateTitle("Register");
   };
+  const imageClick = () => {
+    props.history.push("/");
+    props.updateTitle("Sign in");
+  }
   return (
     <div className="card col-12 col-lg-4 login-card mt-2 hv-center">
       <form>
         <div className="form-group text-left">
+          <img src={back} width="30" height="20" onClick={() => imageClick()} />
           <label htmlFor="username">{props.location.username}</label>
         </div>
         <div className="form-group text-left">

@@ -14,6 +14,7 @@ import AlertComponent from './components/AlertComponent/AlertComponent';
 function App() {
   const [title, updateTitle] = useState(null);
   const [errorMessage, updateErrorMessage] = useState(null);
+  const name = window.$name;
   return (
     <Router>
       <div className="App">
@@ -27,7 +28,12 @@ function App() {
               <RegistrationForm showError={updateErrorMessage} updateTitle={updateTitle} />
             </Route>
             <Route path="/login">
-              <LoginForm showError={updateErrorMessage} updateTitle={updateTitle} />
+
+              {
+                (name !== '' && name !== undefined) ?
+                  <LoginForm showError={updateErrorMessage} updateTitle={updateTitle} /> :
+                  <LoginUser showError={updateErrorMessage} updateTitle={updateTitle} />
+              }
             </Route>
             <Route path="/home">
               <Home />

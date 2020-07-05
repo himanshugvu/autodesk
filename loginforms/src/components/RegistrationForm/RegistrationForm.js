@@ -33,29 +33,28 @@ function RegistrationForm(props) {
       axios
         .post(API_BASE_URL + "register", payload)
         .then(function (response) {
-          console.log(response);
           if (response.status === 201) {
             setState((prevState) => ({
               ...prevState,
               successMessage:
                 "Registration successful. Redirecting to home page..",
             }));
-            redirectToHome();
+            redirectToLoginSuccess();
             props.showError(null);
           } else {
             props.showError("Some error ocurred");
           }
         })
         .catch(function (error) {
-          console.log(error);
+          props.showError("Please enter all the required information");
         });
     } else {
       props.showError("Please enter valid username and password");
     }
   };
-  const redirectToHome = () => {
-    props.updateTitle("Home");
-    props.history.push("/home");
+  const redirectToLoginSuccess = () => {
+    props.updateTitle("Sign in");
+    props.history.push("/");
   };
   const redirectToLogin = () => {
     props.updateTitle("Sign in");
