@@ -72,7 +72,7 @@ function RegistrationForm(props) {
   return (
     <div className="card col-12 col-lg-4 login-card mt-2 hv-center">
       <form>
-        <div className="form-group text-left">
+        <div id="left" className="form-group text-left">
           <label htmlFor="exampleInputFirstName">First name</label>
           <input
             type="text"
@@ -83,7 +83,7 @@ function RegistrationForm(props) {
             onChange={handleChange}
           />
         </div>
-        <div className="form-group text-left">
+        <div id="right" className="form-group text-left">
           <label htmlFor="exampleInputLastName">Last name</label>
           <input
             type="text"

@@ -8,3 +8,12 @@
     color: green;
     font-weight: bold;
 }
+
+#left {
+    float: left;
+    width: 45%;
+  }
+  #right {
+    float: right;
+    width: 48%;
+  }

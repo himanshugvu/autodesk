@@ -7,7 +7,6 @@ import { withRouter } from "react-router-dom";
 function LoginForm(props) {
   const [state, setState] = useState({
     email: "",
-    password: "",
     successMessage: null,
   });
 
@@ -23,20 +22,17 @@ function LoginForm(props) {
     e.preventDefault();
     const payload = {
       username: state.email,
-      password: state.password,
     };
     axios
-      .post(API_BASE_URL + "login", payload)
+      .post(API_BASE_URL + "loginuser", payload)
       .then(function (response) {
         if (response.status === 200) {
           setState((prevState) => ({
             ...prevState,
             successMessage: "Login successful. Redirecting to home page..",
           }));
-          redirectToHome();
+          redirectToLogin();
           props.showError(null);
-        } else if (response.status === 204) {
-          props.showError("Username and password do not match");
         } else {
           props.showError("Username does not exists");
         }
@@ -45,9 +41,9 @@ function LoginForm(props) {
         console.log(error);
       });
   };
-  const redirectToHome = () => {
-    props.updateTitle("Home");
-    props.history.push("/home");
+  const redirectToLogin = () => {
+    props.updateTitle("Login");
+    props.history.push("/login");
   };
   const redirectToRegister = () => {
     props.history.push("/register");
