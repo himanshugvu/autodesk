@@ -18,6 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.autodesk.service.CustomUserDetailsService;
+import com.autodesk.service.impl.CustomUserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
@@ -32,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private JwtAuthenticationEntryPoint unauthorizedHandler;
 
     @Autowired
-    private CustomUserDetailsService customUserDetailsService;
+    private CustomUserDetailsServiceImpl customUserDetailsService;
 
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {return  new JwtAuthenticationFilter();}
